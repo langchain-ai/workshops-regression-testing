@@ -1,0 +1,6 @@
+openai>=1.0,<2.0
+langchain>=0.1.0,<0.2.0
+langchain-openai>=0.0.2,<0.1.0
+langsmith>=0.0.79<0.1.0
+pandas==2.1.4
+bs4==0.0.1
