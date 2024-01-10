@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as Soup
 from langchain_community.document_loaders.recursive_url_loader import RecursiveUrlLoader
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatAnthropic
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
@@ -29,14 +29,13 @@ Now, answer the user question based on the above provided documentation: {questi
 """
 prompt = ChatPromptTemplate.from_template(template)
 
-model = ChatOpenAI(temperature=0, model="gpt-4-1106-preview")
+model = ChatAnthropic(temperature=0, model="claude-2.1")
 
 chain = (
     {
-        "context": lambda x: concatenated_content,
         "question": RunnablePassthrough(),
     }
-    | prompt
+    | prompt.partial(context=concatenated_content)
     | model
     | StrOutputParser()
 )
