@@ -30,3 +30,23 @@ jobs:
 
       - name: Run evaluation
         run: python test_chain.py
+      
+      - name: Save Report as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: report.md
+      
+      - name: Post Comment
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('report.md', 'utf8');
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
