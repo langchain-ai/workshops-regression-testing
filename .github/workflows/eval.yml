@@ -6,6 +6,7 @@ on:
 
 env:
     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     LANGCHAIN_ENDPOINT: "https://api.smith.langchain.com"
     LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
 
