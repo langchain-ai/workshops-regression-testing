@@ -20,7 +20,7 @@ def contains_code_if_expected(run: Run, example: Optional[Example] = None) -> bo
     # Simple evaluator that checks if the output contains a markdown code block
     # if the example also contains a markdown code block
     score = (
-        int("```" in run.outputs["output"]) if "```" in example.outputs["output"] else 1
+        int("```" in run.outputs["output"]) if "```" in example.outputs["answer"] else 1
     )
     return {
         "name": "contains_code_if_expected",
